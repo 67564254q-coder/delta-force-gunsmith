@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>三角洲行动 · 改枪码合集</title>
+  <meta name="description" content="三角洲行动（Delta Force）武器改装分享码合集 — 突击步枪、射手步枪、冲锋枪、狙击枪等全武器改枪方案" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔫</text></svg>" />
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0b0d14;
+      --bg-card: #14171f;
+      --bg-card-hover: #1a1e2b;
+      --bg-code: #1e2333;
+      --text: #e8eaed;
+      --text-muted: #9aa0a8;
+      --text-secondary: #b0b6c2;
+      --accent: #f0c040;
+      --accent-dim: #b8941a;
+      --accent-glow: rgba(240, 192, 64, 0.15);
+      --border: #252a38;
+      --border-hover: #3a4055;
+      --red: #e06c6c;
+      --green: #7dcf7d;
+      --blue: #6cb4ee;
+      --purple: #b07cd8;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.4);
+      --font: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --mono: 'Cascadia Code', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== Scrollbar ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+    /* ===== Header ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 13, 20, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 16px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .logo-icon { font-size: 28px; }
+    .logo-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .header-controls .count-badge {
+      font-size: 13px;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    /* ===== User Menu ===== */
+    .user-area {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .user-login-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .user-login-btn:hover {
+      border-color: var(--accent-dim);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .user-avatar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 4px 8px 4px 4px;
+      border-radius: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+      position: relative;
+    }
+    .user-avatar-wrap:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+    .user-avatar-img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--bg-code);
+    }
+    .user-nickname {
+      font-size: 13px;
+      color: var(--text);
+      max-width: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .user-arrow {
+      font-size: 10px;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+    .user-arrow.open { transform: rotate(180deg); }
+    .user-dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      min-width: 160px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+      display: none;
+      z-index: 200;
+      box-shadow: var(--shadow);
+    }
+    .user-dropdown.open { display: block; }
+    .user-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .user-dropdown-item:hover {
+      background: var(--bg-card-hover);
+      color: var(--text);
+    }
+    .user-dropdown-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 8px;
+    }
+    .user-dropdown-item.logout-item {
+      color: var(--red);
+    }
+    .user-dropdown-item.logout-item:hover {
+      background: rgba(224,108,108,0.1);
+    }
+
+    /* ===== Login Modal ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: modalFadeIn 0.2s ease;
+    }
+    .modal-overlay.open { display: flex; }
+    @keyframes modalFadeIn { from { opacity:0; } to { opacity:1; } }
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      max-width: 380px;
+      width: 90%;
+      text-align: center;
+      animation: modalSlideUp 0.25s ease;
+    }
+    @keyframes modalSlideUp { from { transform: translateY(20px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+    .modal-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .modal-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .modal-close {
+      float: right;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--text); }
+    .login-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .login-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #fff;
+    }
+    .login-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+    }
+    .login-btn:active {
+      transform: translateY(0);
+    }
+    .login-btn.qq {
+      background: linear-gradient(135deg, #12b7f5, #0099ff);
+    }
+    .login-btn.wechat {
+      background: linear-gradient(135deg, #09b83e, #07c160);
+    }
+    .login-btn .login-icon {
+      font-size: 22px;
+    }
+    .modal-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ===== Stats Bar ===== */
+    .stats-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 24px;
+      padding: 16px 24px 0;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .stat-item strong { color: var(--text); font-weight: 600; }
+
+    /* ===== Search & Filters ===== */
+    .controls {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .search-wrap {
+      flex: 1;
+      min-width: 200px;
+      position: relative;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 10px 16px 10px 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 14px;
+      font-family: var(--font);
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .search-wrap input::placeholder { color: var(--text-muted); }
+    .search-wrap input:focus {
+      border-color: var(--accent-dim);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .search-wrap .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    .filter-btn {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      color: var(--text);
+    }
+    .filter-btn.active {
+      border-color: var(--accent-dim);
+      background: var(--accent-glow);
+      color: var(--accent);
+    }
+    .filter-btn.clear-btn {
+      color: var(--text-muted);
+      font-size: 12px;
+      opacity: 0.6;
+    }
+    .filter-btn.clear-btn:hover { opacity: 1; }
+    .filter-btn.fav-filter {
+      border-color: var(--red);
+      color: var(--red);
+    }
+    .filter-btn.fav-filter.active {
+      background: rgba(224,108,108,0.15);
+    }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* ===== Grid ===== */
+    .grid-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 40px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    /* ===== Card ===== */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border 0.2s, background 0.2s, transform 0.15s, box-shadow 0.2s;
+      cursor: default;
+      position: relative;
+    }
+    .card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.3;
+      flex: 1;
+    }
+    .card-category {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+      letter-spacing: 0.5px;
+    }
+    .cat-ar     { background: rgba(108,180,238,0.15); color: var(--blue); }
+    .cat-sm-g   { background: rgba(124,207,124,0.15); color: var(--green); }
+    .cat-dmr    { background: rgba(176,124,216,0.15); color: var(--purple); }
+    .cat-sr     { background: rgba(224,108,108,0.15); color: var(--red); }
+    .cat-lmg    { background: rgba(240,192,64,0.15); color: var(--accent); }
+    .cat-sg     { background: rgba(240,192,64,0.10); color: #e0a040; }
+    .cat-pistol { background: rgba(180,180,200,0.15); color: #b8bcd0; }
+
+    .card-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .card-meta span { display: flex; align-items: center; gap: 4px; }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+    .tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: var(--bg-code);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .code-block {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      word-break: break-all;
+      cursor: pointer;
+      transition: border 0.2s, background 0.2s;
+      position: relative;
+    }
+    .code-block:hover {
+      border-color: var(--accent-dim);
+      background: rgba(240,192,64,0.05);
+    }
+    .code-block .code-text {
+      flex: 1;
+      min-width: 0;
+      line-height: 1.4;
+    }
+    .code-block .copy-btn {
+      flex-shrink: 0;
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+      padding: 2px;
+    }
+    .code-block .copy-btn:hover { opacity: 1; }
+    .code-block .copied-toast {
+      position: absolute;
+      top: -30px;
+      right: 0;
+      background: var(--accent);
+      color: #000;
+      font-family: var(--font);
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      opacity: 0;
+      transition: opacity 0.25s;
+      pointer-events: none;
+      font-weight: 600;
+    }
+    .code-block .copied-toast.show { opacity: 1; }
+
+    /* ===== Favorite Heart ===== */
+    .fav-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      background: none;
+      border: none;
+      line-height: 1;
+      padding: 2px;
+    }
+    .card:hover .fav-btn { opacity: 0.7; }
+    .fav-btn:hover { opacity: 1 !important; transform: scale(1.15); }
+    .fav-btn.favored { opacity: 1 !important; }
+
+    /* ===== User Badge ===== */
+    .user-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(240,192,64,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(240,192,64,0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-right: 6px;
+    }
+
+    /* ===== Comment Section ===== */
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .card-action-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .card-action-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+      background: var(--bg-card-hover);
+    }
+    .card-action-btn .comment-count {
+      font-size: 11px;
+      background: var(--border);
+      padding: 1px 6px;
+      border-radius: 10px;
+      min-width: 18px;
+      text-align: center;
+    }
+    .comment-section {
+      margin-top: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease;
+    }
+    .comment-section.open {
+      max-height: 600px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .comment-item {
+      display: flex;
+      gap: 8px;
+      padding: 8px 10px;
+      background: var(--bg-code);
+      border-radius: var(--radius-sm);
+      position: relative;
+    }
+    .comment-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      background: var(--bg-card);
+    }
+    .comment-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .comment-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+    .comment-nickname {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .comment-time {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .comment-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .comment-delete {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.15s;
+      background: none;
+      border: none;
+      padding: 2px 4px;
+    }
+    .comment-item:hover .comment-delete { opacity: 0.5; }
+    .comment-delete:hover { opacity: 1 !important; color: var(--red); }
+    .comment-input-wrap {
+      display: flex;
+      gap: 8px;
+    }
+    .comment-input {
+      flex: 1;
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 13px;
+      font-family: var(--font);
+      outline: none;
+      transition: border 0.2s;
+    }
+    .comment-input:focus {
+      border-color: var(--accent-dim);
+    }
+    .comment-input::placeholder { color: var(--text-muted); }
+    .comment-submit {
+      padding: 8px 14px;
+      background: var(--accent-dim);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #000;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .comment-submit:hover { background: var(--accent); }
+
+    /* ===== Empty / No results ===== */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state .big-icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-state h3 { font-size: 18px; margin-bottom: 8px; color: var(--text); }
+    .empty-state p { font-size: 14px; }
+
+    /* ===== Share Build Button ===== */
+    .share-fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f0c040, #d4a020);
+      border: none;
+      color: #000;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(240,192,64,0.35);
+      transition: all 0.25s;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .share-fab:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(240,192,64,0.5);
+    }
+    .share-fab:active {
+      transform: scale(0.95);
+    }
+
+    /* ===== Share Modal / Form ===== */
+    .share-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+    }
+    .share-form .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .share-form label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .share-form input,
+    .share-form select,
+    .share-form textarea {
+      padding: 10px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 14px;
+      font-family: var(--font);
+      outline: none;
+      transition: border 0.2s;
+    }
+    .share-form input:focus,
+    .share-form select:focus,
+    .share-form textarea:focus {
+      border-color: var(--accent-dim);
+    }
+    .share-form textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+    .share-form select option {
+      background: var(--bg-card);
+      color: var(--text);
+    }
+    .share-form .form-submit-btn {
+      padding: 12px;
+      background: linear-gradient(135deg, #f0c040, #d4a020);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #000;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+    .share-form .form-submit-btn:hover { filter: brightness(1.1); }
+    .share-form .form-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent-dim); }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 640px) {
+      .header-inner { height: 56px; }
+      .logo { font-size: 18px; }
+      .logo-sub { display: none; }
+      .grid { grid-template-columns: 1fr; }
+      .controls { padding: 12px 16px; }
+      .grid-container { padding: 0 16px 24px; }
+      .stats-bar { padding: 12px 16px 0; gap: 12px; }
+      header { padding: 0 16px; }
+      .card { padding: 16px; }
+      .share-fab { bottom: 16px; right: 16px; width: 48px; height: 48px; font-size: 20px; }
+      .user-nickname { max-width: 50px; }
+    }
+
+    /* ===== QQ Section ===== */
+    .qq-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 16px;
+    }
+    .qq-inner {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: linear-gradient(135deg, rgba(0,153,255,0.08), rgba(0,100,200,0.04));
+      border: 1px solid rgba(0,153,255,0.2);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      transition: border 0.2s, background 0.2s;
+    }
+    .qq-inner:hover {
+      border-color: rgba(0,153,255,0.4);
+      background: linear-gradient(135deg, rgba(0,153,255,0.12), rgba(0,100,200,0.06));
+    }
+    .qq-icon {
+      font-size: 40px;
+      flex-shrink: 0;
+    }
+    .qq-info { flex: 1; min-width: 0; }
+    .qq-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .qq-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .qq-number {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-code);
+      border: 1px solid rgba(0,153,255,0.2);
+      border-radius: var(--radius-sm);
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: border 0.2s, background 0.2s;
+      position: relative;
+    }
+    .qq-number:hover {
+      border-color: #0099ff;
+      background: rgba(0,153,255,0.08);
+    }
+    .qq-number strong { color: #0099ff; letter-spacing: 2px; }
+    .copy-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+    .qq-number:hover .copy-hint { opacity: 1; }
+    .qq-toast {
+      position: absolute;
+      top: -30px;
+      right: 0;
+      background: #0099ff;
+      color: #fff;
+      font-family: var(--font);
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      opacity: 0;
+      transition: opacity 0.25s;
+      pointer-events: none;
+      font-weight: 600;
+    }
+    .qq-toast.show { opacity: 1; }
+
+    /* ===== Scroll Reveal ===== */
+    .card { opacity: 0; transform: translateY(12px); }
+    .card.visible { animation: fadeUp 0.35s ease forwards; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-icon">⚙️</span>
+      <span>三角洲改枪码</span>
+      <span class="logo-sub">DELTA FORCE GUNSMITH</span>
+    </div>
+    <div class="header-controls">
+      <span class="count-badge" id="countBadge">0 个方案</span>
+      <div class="user-area" id="userArea">
+        <button class="user-login-btn" id="loginBtn" title="登录">👤</button>
+        <div class="user-avatar-wrap" id="userMenu" style="display:none;">
+          <img class="user-avatar-img" id="userAvatar" src="" alt="avatar" />
+          <span class="user-nickname" id="userNickname"></span>
+          <span class="user-arrow" id="userArrow">▼</span>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-dropdown-item" data-action="favorites">❤️ 我的收藏</div>
+            <div class="user-dropdown-item" data-action="myshares">📤 我的分享</div>
+            <div class="user-dropdown-divider"></div>
+            <div class="user-dropdown-item logout-item" data-action="logout">🚪 退出登录</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Stats -->
+<div class="stats-bar" id="statsBar"></div>
+
+<!-- Search & Filters -->
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="搜索武器名、标签、描述…" autocomplete="off" />
+  </div>
+  <div class="filter-group" id="filterGroup"></div>
+  <button class="filter-btn fav-filter" id="favFilterBtn">❤️ 我的收藏</button>
+  <button class="filter-btn clear-btn" id="clearFilters" title="清除筛选">✕ 清除</button>
+</div>
+
+<!-- Grid -->
+<div class="grid-container">
+  <div class="grid" id="grid"></div>
+</div>
+
+<!-- QQ Section -->
+<div class="qq-section">
+  <div class="qq-inner">
+    <div class="qq-icon">💬</div>
+    <div class="qq-info">
+      <div class="qq-title">QQ 交流群</div>
+      <div class="qq-desc">三角洲改枪方案交流、投稿、开黑组队，欢迎加入！</div>
+      <div class="qq-number" onclick="copyQQ(this)" title="点击复制群号">
+        <span>🐧 群号：<strong>123456789</strong></span>
+        <span class="copy-hint">📋 点击复制</span>
+        <span class="copied-toast qq-toast">已复制 ✓</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>⚙️ 三角洲行动 · 改枪码合集 &nbsp;|&nbsp; 点击代码复制分享码 &nbsp;|&nbsp; 🐧 QQ群：123456789 &nbsp;|&nbsp; 持续更新中</p>
+</footer>
+
+<!-- Share FAB -->
+<button class="share-fab" id="shareFab" title="分享改枪方案">📤</button>
+
+<!-- ===== Login Modal ===== -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal-box">
+    <button class="modal-close" id="loginModalClose">✕</button>
+    <div class="modal-title">🔐 登录</div>
+    <div class="modal-subtitle">选择一种方式快速登录，管理你的收藏与分享</div>
+    <div class="login-btns">
+      <button class="login-btn qq" data-provider="qq">
+        <span class="login-icon">🐧</span>
+        QQ 登录
+      </button>
+      <button class="login-btn wechat" data-provider="wechat">
+        <span class="login-icon">💬</span>
+        微信登录
+      </button>
+    </div>
+    <div class="modal-note">登录后即可收藏方案、发布评论和分享改枪配置</div>
+  </div>
+</div>
+
+<!-- ===== Share Build Modal ===== -->
+<div class="modal-overlay" id="shareModal">
+  <div class="modal-box" style="max-width:460px;">
+    <button class="modal-close" id="shareModalClose">✕</button>
+    <div class="modal-title">📤 分享改枪方案</div>
+    <div class="modal-subtitle">向其他玩家分享你的改枪配置</div>
+    <div class="share-form" id="shareForm">
+      <div class="form-row">
+        <label>方案名称</label>
+        <input type="text" id="shareName" placeholder="如：M4A1 极速开镜" required />
+      </div>
+      <div class="form-row">
+        <label>武器</label>
+        <input type="text" id="shareWeapon" placeholder="如：M4A1" required />
+      </div>
+      <div class="form-row">
+        <label>分类</label>
+        <select id="shareCategory">
+          <option value="ar">突击步枪</option>
+          <option value="smg">冲锋枪</option>
+          <option value="dmr">射手步枪</option>
+          <option value="sr">狙击步枪</option>
+          <option value="lmg">轻机枪</option>
+          <option value="sg">霰弹枪</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>分享码</label>
+        <input type="text" id="shareCode" placeholder="如：DF-M4A1-2R5T8Y9" required />
+      </div>
+      <div class="form-row">
+        <label>标签（逗号分隔）</label>
+        <input type="text" id="shareTags" placeholder="如：稳枪, 中距离, 新手友好" />
+      </div>
+      <div class="form-row">
+        <label>描述</label>
+        <textarea id="shareDesc" placeholder="分享你的改枪思路和心得…" rows="3"></textarea>
+      </div>
+      <button class="form-submit-btn" type="button" id="shareSubmitBtn">✨ 发布分享</button>
+      <div class="form-note">分享需要先登录账号</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  DATA — Weapons / Builds
+// ============================================================
+const BUILDS = [
+  // ────────── 突击步枪 AR ──────────
+  { id:"ar01", name:"K416 全能战士", category:"ar", weapon:"K416", code:"DF-K416-7X9K2P3Q", tags:["稳枪","中距离","新手友好"], desc:"均衡配重 + 长枪管 + 垂直握把，兼顾后座控制与开镜速度，泛用性最强的突进步枪方案。" },
+  { id:"ar02", name:"M4A1 极速开镜", category:"ar", weapon:"M4A1", code:"DF-M4A1-2R5T8Y9", tags:["极速开镜","腰射","CQB"], desc:"短枪管 + 无托托芯 + 红点，牺牲射程换取极致开镜速度，适合室内近战。" },
+  { id:"ar03", name:"AK-12 暴力压枪", category:"ar", weapon:"AK-12", code:"DF-AK12-4M6N1B8", tags:["高伤害","重管","压枪流"], desc:"重型枪管 + 战术枪托 + 补偿器，将 AK 系列高后座转化为可控火力，中距离压制力极强。" },
+  { id:"ar04", name:"SCAR-H 精准射手", category:"ar", weapon:"SCAR-H", code:"DF-SCARH-8F3D2A7", tags:["半自动","高精度","中远"], desc:"加长枪管 + 两脚架 + 高倍镜，7.62 口径单点精度堪比 DMR，但保留全自动应急能力。" },
+  { id:"ar05", name:"G36C 轻量化突袭", category:"ar", weapon:"G36C", code:"DF-G36C-1W5X9C4", tags:["轻量化","机动","近中"], desc:"紧凑型护木 + 轻量枪管 + Reflex，跑射切换极快，适合游走打法。" },
+  { id:"ar06", name:"AKM 经典猛男", category:"ar", weapon:"AKM", code:"DF-AKM-5B7K2H0", tags:["高伤害","铁瞄","经典"], desc:"保留木质护木 + 标准枪管，铁瞄流极致火力，近战一发入魂。" },
+  { id:"ar07", name:"QBZ-95 国产之光", category:"ar", weapon:"QBZ-95", code:"DF-QBZ95-3H6J8L1", tags:["无托","均衡","稳定"], desc:"无托结构 + 改良扳机 + 垂直握把，天生短小精悍，无需太多改装就有不错表现。" },
+  { id:"ar08", name:"HK416 DMR 改", category:"ar", weapon:"HK416", code:"DF-HK416-9P0O2I6", tags:["DMR改","高倍镜","远程精准"], desc:"换装加长重型枪管 + 高倍镜 + 两脚架，将 HK416 改造为精确射手步枪。" },
+
+  // ────────── 冲锋枪 SMG ──────────
+  { id:"smg01", name:"Vector .45 ACP 速射", category:"smg", weapon:"Vector", code:"DF-VCTR-6T4Y2W8", tags:["极高射速","近战之王","腰射"], desc:"封闭式枪机 + 短枪管 + 腰射镭射，室内遭遇战爆发力第一，30 发内解决一切。" },
+  { id:"smg02", name:"MP5 消音渗透", category:"smg", weapon:"MP5", code:"DF-MP5-2U7H1N5", tags:["消音","渗透","稳定"], desc:"整体消音器 + 亚音速弹 + Reflex，隐蔽性拉满，特别适合绕后和潜入打法。" },
+  { id:"smg03", name:"P90 大弹鼓", category:"smg", weapon:"P90", code:"DF-P90-4R9A3P6", tags:["大弹匣","持续输出","扫射"], desc:"50 发弹匣 + 激光指示器，持续火力压制不换弹，弹道平直易控。" },
+  { id:"smg04", name:"UMP45 消音游走", category:"smg", weapon:"UMP45", code:"DF-UMP45-7K1X5B0", tags:["消音","游走","中距"], desc:"加长消音器 + 垂直握把 + 中倍镜，兼顾隐蔽与射程，适合中距离游走。" },
+  { id:"smg05", name:"MP7 闪电突袭", category:"smg", weapon:"MP7", code:"DF-MP7-3D8F9G2", tags:["极速","轻量化","冲锋"], desc:"极限轻量化改装 + 折叠枪托，跑射速度拉满，打带跑之王。" },
+  { id:"smg06", name:"PP-19 Bizon 野牛", category:"smg", weapon:"PP-19 Bizon", code:"DF-BIZON-5C2N7V1", tags:["弹鼓","持续火力","9mm"], desc:"标志性 64 发弹鼓 + 紧凑护木，换弹频率极低，压制走廊利器。" },
+
+  // ────────── 射手步枪 DMR ──────────
+  { id:"dmr01", name:"M110 精确制裁", category:"dmr", weapon:"M110", code:"DF-M110-8D2H5K9", tags:["高伤害","7.62mm","中远"], desc:"加长重型枪管 + 两脚架 + 高倍瞄准镜，7.62 口径惩罚力十足，两枪带走。" },
+  { id:"dmr02", name:"MK12 SPR 侦察", category:"dmr", weapon:"MK12", code:"DF-MK12-1P4T7R0", tags:["5.56mm","低后座","持续输出"], desc:"5.56 口径低后座 + 消音器 + 20 发弹匣，持续精准输出，侦察位首选。" },
+  { id:"dmr03", name:"SVD 大炮改", category:"dmr", weapon:"SVD", code:"DF-SVD-3F0B8L2", tags:["7.62x54R","高伤害","老手向"], desc:"改良枪托 + 长枪管 + PSO-1 光学瞄具，保留经典半自动体验的同时提升精度。" },
+  { id:"dmr04", name:"VSS Vintorez 微声狙", category:"dmr", weapon:"VSS Vintorez", code:"DF-VSS-9N5M2X7", tags:["自带消音","亚音速","特种"], desc:"整体消音 + SP-6 亚音速弹 + 4 倍镜，隐蔽与致命兼具的特种作战方案。" },
+  { id:"dmr05", name:"G3 战斗射手", category:"dmr", weapon:"G3", code:"DF-G3-2K8H4J1", tags:["7.62mm","高性价比","简单粗暴"], desc:"加重枪管 + 光学瞄具，最简单的改装换来最直接的伤害，性价比之王。" },
+
+  // ────────── 狙击步枪 SR ──────────
+  { id:"sr01", name:"AWM 终极重狙", category:"sr", weapon:"AWM", code:"DF-AWM-4P2R9X7", tags:["一枪致命",".338","超远距"], desc:".338 Lapua 弹 + 26寸重型枪管 + 最高倍镜，超远程一发带走，狙击终极形态。" },
+  { id:"sr02", name:"M200 死神", category:"sr", weapon:"CheyTac M200", code:"DF-M200-6K3B8L1", tags:["反器材","超远","高穿透"], desc:"反器材口径 + 加长枪管 + 弹道计算机，无视大部分掩体，两千公尺外直击。" },
+  { id:"sr03", name:"L96A1 经典栓动", category:"sr", weapon:"L96A1", code:"DF-L96A1-7N1W5F3", tags:["经典","平衡","中远"], desc:"标准配重 + 经典造型 + 中倍镜，稳定性与颜值兼具，老狙击手的浪漫。" },
+  { id:"sr04", name:"SV-98 俄式精准", category:"sr", weapon:"SV-98", code:"DF-SV98-2T9M4R0", tags:["轻量","快速架枪","俄式"], desc:"轻量化枪托 + 中等倍镜，比 AWM 更快的开镜速度，中距离狙击反应极快。" },
+  { id:"sr05", name:"M40A5 侦察狙击", category:"sr", weapon:"M40A5", code:"DF-M40-5X1K7P2", tags:["消音","侦察","机动"], desc:"消音器 + 可调枪托 + 中倍镜，跑狙流首选，击杀不暴露位置。" },
+
+  // ────────── 轻机枪 LMG ──────────
+  { id:"lmg01", name:"M249 SAW 火力压制", category:"lmg", weapon:"M249 SAW", code:"DF-M249-3P7K2N9", tags:["弹链","压制","100发"], desc:"100 发弹链 + 两脚架 + 反射镜，架点压制无限火力，一个弹匣封一条路。" },
+  { id:"lmg02", name:"PKM 俄式重火力", category:"lmg", weapon:"PKM", code:"DF-PKM-8K4L1X5", tags:["7.62x54R","高伤害","架点"], desc:"重型枪管 + 两脚架 + 光学瞄具，7.62x54R 弹链输出，压制力与杀伤兼具。" },
+  { id:"lmg03", name:"RPK-16 轻机改", category:"lmg", weapon:"RPK-16", code:"DF-RPK16-1W8N3D6", tags:["5.45mm","轻量化","游走"], desc:"长弹匣 + 握把 + Reflex，比传统 LMG 更灵活的架点方案，兼顾机动与火力。" },
+  { id:"lmg04", name:"MG338 新时代", category:"lmg", weapon:"MG338", code:"DF-MG338-6B0T4R2", tags:[".338","远程架点","双用途"], desc:".338 Norma 口径 + 高倍镜，兼具狙击射程与机枪火力，新时代全距离压制方案。" },
+
+  // ────────── 霰弹枪 SG ──────────
+  { id:"sg01", name:"M870 泵动之王", category:"sg", weapon:"M870", code:"DF-M870-4P9K2R7", tags:["泵动","高伤害","一发入魂"], desc:"加长枪管 + 收束器 + 战术托，泵动霰弹最大伤害配置，近距离必杀。" },
+  { id:"sg02", name:"AA-12 自动狂潮", category:"sg", weapon:"AA-12", code:"DF-AA12-2W7L5N1", tags:["全自动","弹鼓","清场"], desc:"20 发弹鼓 + 收束器，全自动突突突，室内清场效率极高，谁用谁知道。" },
+  { id:"sg03", name:"SPAS-12 双模式", category:"sg", weapon:"SPAS-12", code:"DF-SPAS12-6H3X8F0", tags:["半自动","泵动","双模式"], desc:"半自动/泵动切换 + 折叠托 + 雷射，灵活应对不同距离，万能霰弹方案。" },
+  { id:"sg04", name:"KSG 双管地狱", category:"sg", weapon:"Kel-Tec KSG", code:"DF-KSG-9J1P4M2", tags:["双管供弹","紧凑","高速连射"], desc:"双弹仓供弹 + 短枪管，换弹频率减半，紧凑结构狭窄空间无敌。" },
+];
+
+// ============================================================
+//  CATEGORIES
+// ============================================================
+const CATEGORIES = [
+  { key:"ar", label:"突击步枪", cls:"cat-ar", icon:"🔫" },
+  { key:"smg",  label:"冲锋枪",   cls:"cat-sm-g",  icon:"💨" },
+  { key:"dmr",   label:"射手步枪",    cls:"cat-dmr",    icon:"🎯" },
+  { key:"sr",   label:"狙击步枪",    cls:"cat-sr",    icon:"🔭" },
+  { key:"lmg",  label:"轻机枪",   cls:"cat-lmg",   icon:"🔥" },
+  { key:"sg",    label:"霰弹枪",     cls:"cat-sg",     icon:"💥" },
+];
+
+// ============================================================
+//  STATE
+// ============================================================
+let activeCat = null;
+let searchVal = "";
+let showFavoritesOnly = false;
+
+// ============================================================
+//  DOM REFS
+// ============================================================
+const gridEl     = document.getElementById("grid");
+const searchInp  = document.getElementById("searchInput");
+const filterGrp  = document.getElementById("filterGroup");
+const clearBtn   = document.getElementById("clearFilters");
+const countBadge = document.getElementById("countBadge");
+const statsBar   = document.getElementById("statsBar");
+const favFilterBtn = document.getElementById("favFilterBtn");
+
+// ============================================================
+//  LOCAL STORAGE HELPERS
+// ============================================================
+const LS_KEY_USER    = 'df_gunsmith_user';
+const LS_KEY_FAVS    = 'df_gunsmith_favorites';
+const LS_KEY_COMMENTS = 'df_gunsmith_comments';
+const LS_KEY_USER_BUILDS = 'df_gunsmith_user_builds';
+
+function getLS(key, fallback) {
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+  catch(e) { return fallback; }
+}
+function setLS(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) {}
+}
+
+// ============================================================
+//  USER / AUTH
+// ============================================================
+function getCurrentUser() {
+  return getLS(LS_KEY_USER, null);
+}
+function setCurrentUser(user) {
+  if (user) setLS(LS_KEY_USER, user);
+  else localStorage.removeItem(LS_KEY_USER);
+  updateUserUI();
+}
+function isLoggedIn() {
+  return !!getCurrentUser();
+}
+
+// ============================================================
+//  FAVORITES
+// ============================================================
+function getFavorites() {
+  return getLS(LS_KEY_FAVS, {});
+}
+function toggleFavorite(buildId) {
+  const favs = getFavorites();
+  if (favs[buildId]) delete favs[buildId];
+  else favs[buildId] = true;
+  setLS(LS_KEY_FAVS, favs);
+  render();
+}
+
+// ============================================================
+//  COMMENTS
+// ============================================================
+function getComments(buildId) {
+  const all = getLS(LS_KEY_COMMENTS, {});
+  return all[buildId] || [];
+}
+function addComment(buildId, text) {
+  const user = getCurrentUser();
+  if (!user) return;
+  const all = getLS(LS_KEY_COMMENTS, {});
+  if (!all[buildId]) all[buildId] = [];
+  all[buildId].push({
+    id: Date.now() + '_' + Math.random().toString(36).slice(2,6),
+    userId: user.id,
+    nickname: user.nickname,
+    avatar: user.avatar,
+    text: text.trim(),
+    time: Date.now()
+  });
+  setLS(LS_KEY_COMMENTS, all);
+}
+function deleteComment(buildId, commentId) {
+  const all = getLS(LS_KEY_COMMENTS, {});
+  if (!all[buildId]) return;
+  all[buildId] = all[buildId].filter(c => c.id !== commentId);
+  setLS(LS_KEY_COMMENTS, all);
+}
+function getCommentCount(buildId) {
+  return getComments(buildId).length;
+}
+
+// ============================================================
+//  USER BUILDS
+// ============================================================
+function getUserBuilds() {
+  return getLS(LS_KEY_USER_BUILDS, []);
+}
+function addUserBuild(data) {
+  const user = getCurrentUser();
+  if (!user) return;
+  const builds = getUserBuilds();
+  const newBuild = {
+    id: 'user_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
+    name: data.name,
+    category: data.category,
+    weapon: data.weapon,
+    code: data.code,
+    tags: data.tags,
+    desc: data.desc,
+    submitter: user.nickname,
+    submitterId: user.id,
+    submitterAvatar: user.avatar,
+    timestamp: Date.now(),
+    isUserBuild: true
+  };
+  builds.unshift(newBuild);
+  setLS(LS_KEY_USER_BUILDS, builds);
+  return newBuild;
+}
+function deleteUserBuild(buildId) {
+  const builds = getUserBuilds();
+  const filtered = builds.filter(b => b.id !== buildId);
+  setLS(LS_KEY_USER_BUILDS, filtered);
+}
+
+function getAllBuilds() {
+  return [...BUILDS, ...getUserBuilds()];
+}
+
+// ============================================================
+//  USER UI
+// ============================================================
+function updateUserUI() {
+  const user = getCurrentUser();
+  const loginBtn = document.getElementById('loginBtn');
+  const userMenu = document.getElementById('userMenu');
+  const userAvatar = document.getElementById('userAvatar');
+  const userNickname = document.getElementById('userNickname');
+
+  if (user) {
+    loginBtn.style.display = 'none';
+    userMenu.style.display = 'flex';
+    userAvatar.src = user.avatar;
+    userAvatar.onerror = function() { this.src = ''; this.style.display='none'; };
+    userNickname.textContent = user.nickname;
+  } else {
+    loginBtn.style.display = 'flex';
+    userMenu.style.display = 'none';
+  }
+}
+
+// ============================================================
+//  LOGIN MODAL
+// ============================================================
+function openLoginModal() {
+  document.getElementById('loginModal').classList.add('open');
+}
+function closeLoginModal() {
+  document.getElementById('loginModal').classList.remove('open');
+}
+
+function performLogin(provider) {
+  const avatarBase = 'https://api.dicebear.com/7.x/thumbs/svg?seed=';
+  const nicknames = {
+    qq: ['枪王老A', '战术饼干', '三角洲突击手', 'CQB达人', '压枪小王子'],
+    wechat: ['火力支援', '狙击の眼', '夜行猎手', '移动军火库', '战地老司机']
+  };
+  const pool = nicknames[provider] || nicknames.qq;
+  const nickname = pool[Math.floor(Math.random() * pool.length)] + (provider === 'qq' ? '🐧' : '💬');
+  const user = {
+    id: provider + '_' + Date.now(),
+    nickname: nickname,
+    avatar: avatarBase + encodeURIComponent(nickname + Date.now()),
+    provider: provider,
+    loginTime: Date.now()
+  };
+  setCurrentUser(user);
+  closeLoginModal();
+  render();
+}
+
+// ============================================================
+//  RENDER
+// ============================================================
+function render() {
+  const user = getCurrentUser();
+  const query = searchVal.trim().toLowerCase();
+  const favs = getFavorites();
+  const allBuilds = getAllBuilds();
+
+  let filtered = allBuilds.filter(b => {
+    if (activeCat && b.category !== activeCat) return false;
+    if (showFavoritesOnly && !favs[b.id]) return false;
+    if (!query) return true;
+    return (
+      b.name.toLowerCase().includes(query) ||
+      b.weapon.toLowerCase().includes(query) ||
+      b.code.toLowerCase().includes(query) ||
+      b.desc.toLowerCase().includes(query) ||
+      b.tags.some(t => t.toLowerCase().includes(query))
+    );
+  });
+
+  // Update badge
+  countBadge.textContent = `${filtered.length} / ${allBuilds.length} 个方案`;
+
+  // Update stats
+  updateStats();
+
+  // Favorites filter button state
+  favFilterBtn.classList.toggle('active', showFavoritesOnly);
+
+  // Render grid
+  if (filtered.length === 0) {
+    gridEl.innerHTML = `
+      <div class="empty-state">
+        <div class="big-icon">${showFavoritesOnly ? '❤️' : '🔍'}</div>
+        <h3>${showFavoritesOnly ? '还没收藏任何方案' : '没找到匹配的方案'}</h3>
+        <p>${showFavoritesOnly ? '浏览方案时点击 ♡ 即可收藏' : '试试其他关键词，或清除筛选条件'}</p>
+      </div>
+    `;
+    return;
+  }
+
+  gridEl.innerHTML = filtered.map((b, idx) => {
+    const cat = CATEGORIES.find(c => c.key === b.category);
+    const catCls = cat ? cat.cls : "";
+    const catLabel = cat ? cat.label : b.category;
+    const isFav = !!favs[b.id];
+    const commentCount = getCommentCount(b.id);
+    const userBuildBadge = b.isUserBuild ? `<span class="user-badge">👤 ${b.submitter || '玩家分享'}</span>` : '';
+
+    return `
+      <div class="card" data-id="${b.id}" style="animation-delay:${(idx % 12) * 30}ms">
+        <button class="fav-btn ${isFav ? 'favored' : ''}" data-id="${b.id}" onclick="event.stopPropagation(); toggleFavorite('${b.id}')" title="${isFav ? '取消收藏' : '收藏'}">${isFav ? '❤️' : '♡'}</button>
+        <div class="card-header">
+          <div class="card-title">${userBuildBadge}${b.name}</div>
+          <span class="card-category ${catCls}">${catLabel}</span>
+        </div>
+        <div class="card-meta">
+          <span>🔧 ${b.weapon}</span>
+          <span>🏷️ ${b.tags.slice(0,2).join(" · ")}</span>
+        </div>
+        <div class="card-desc">${b.desc}</div>
+        <div class="card-tags">
+          ${b.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+        </div>
+        <div class="code-block" data-code="${b.code}" onclick="copyCode(this)">
+          <span class="code-text">${b.code}</span>
+          <span class="copy-btn" title="复制分享码">📋</span>
+          <span class="copied-toast">已复制 ✓</span>
+        </div>
+        <div class="card-actions">
+          <button class="card-action-btn comment-toggle-btn" data-id="${b.id}" onclick="toggleComments('${b.id}')">
+            💬 评论 <span class="comment-count">${commentCount}</span>
+          </button>
+        </div>
+        <div class="comment-section" id="comments-${b.id}">
+          <div class="comment-list" id="commentList-${b.id}">
+            ${renderComments(b.id)}
+          </div>
+          <div class="comment-input-wrap">
+            <input class="comment-input" id="commentInput-${b.id}" placeholder="${isLoggedIn() ? '写下你的评论…' : '请先登录后评论'}" ${isLoggedIn() ? '' : 'disabled'} />
+            <button class="comment-submit" data-id="${b.id}" ${isLoggedIn() ? `onclick="submitComment('${b.id}')"` : 'disabled'} ${isLoggedIn() ? '' : 'style="opacity:0.4;cursor:not-allowed;"'}>发送</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // Animate in
+  requestAnimationFrame(() => {
+    document.querySelectorAll(".card").forEach(el => el.classList.add("visible"));
+  });
+}
+
+function renderComments(buildId) {
+  const comments = getComments(buildId);
+  const user = getCurrentUser();
+  if (comments.length === 0) return '<div style="text-align:center;padding:12px;color:var(--text-muted);font-size:13px;">暂无评论，来抢沙发 🛋️</div>';
+  return comments.map(c => {
+    const isOwner = user && c.userId === user.id;
+    const timeStr = formatTime(c.time);
+    return `
+      <div class="comment-item">
+        <div class="comment-avatar">${c.avatar ? `<img src="${c.avatar}" style="width:28px;height:28px;border-radius:50%;object-fit:cover;" onerror="this.style.display='none'" />` : '💬'}</div>
+        <div class="comment-body">
+          <div class="comment-meta">
+            <span class="comment-nickname">${c.nickname}</span>
+            <span class="comment-time">${timeStr}</span>
+          </div>
+          <div class="comment-text">${escapeHtml(c.text)}</div>
+        </div>
+        ${isOwner ? `<button class="comment-delete" onclick="deleteCommentById('${buildId}','${c.id}')" title="删除评论">✕</button>` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function formatTime(ts) {
+  const d = new Date(ts);
+  const now = new Date();
+  const diff = Math.floor((now - d) / 1000);
+  if (diff < 60) return '刚刚';
+  if (diff < 3600) return Math.floor(diff/60) + '分钟前';
+  if (diff < 86400) return Math.floor(diff/3600) + '小时前';
+  if (diff < 172800) return '昨天';
+  return d.toLocaleDateString('zh-CN', { month:'short', day:'numeric' });
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function updateStats() {
+  const allBuilds = getAllBuilds();
+  const total = allBuilds.length;
+  const byCat = {};
+  allBuilds.forEach(b => { byCat[b.category] = (byCat[b.category] || 0) + 1; });
+  const parts = CATEGORIES.map(c => {
+    const n = byCat[c.key] || 0;
+    return `<span class="stat-item">${c.icon} <strong>${n}</strong></span>`;
+  }).join("");
+  statsBar.innerHTML = `<span class="stat-item">📦 总计 <strong>${total}</strong> 个改枪方案</span>` + parts;
+}
+
+// ============================================================
+//  COMMENTS TOGGLE
+// ============================================================
+function toggleComments(buildId) {
+  const section = document.getElementById('comments-' + buildId);
+  if (!section) return;
+  section.classList.toggle('open');
+}
+
+// ============================================================
+//  SUBMIT COMMENT
+// ============================================================
+function submitComment(buildId) {
+  const input = document.getElementById('commentInput-' + buildId);
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+  if (!isLoggedIn()) { alert('请先登录'); return; }
+  addComment(buildId, text);
+  input.value = '';
+  // Update comment count and list
+  render();
+  // Re-open the comment section
+  setTimeout(() => {
+    const section = document.getElementById('comments-' + buildId);
+    if (section) section.classList.add('open');
+  }, 50);
+}
+
+// ============================================================
+//  DELETE COMMENT
+// ============================================================
+function deleteCommentById(buildId, commentId) {
+  if (!confirm('确定删除这条评论？')) return;
+  deleteComment(buildId, commentId);
+  render();
+  setTimeout(() => {
+    const section = document.getElementById('comments-' + buildId);
+    if (section) section.classList.add('open');
+  }, 50);
+}
+
+// ============================================================
+//  COPY CODE
+// ============================================================
+function copyCode(el) {
+  const code = el.dataset.code;
+  const toast = el.querySelector(".copied-toast");
+  if (!code) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code).catch(() => fallbackCopy(code));
+  } else {
+    fallbackCopy(code);
+  }
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 1500);
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed"; ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
+function copyQQ(el) {
+  const qq = el.querySelector("strong");
+  if (!qq) return;
+  const text = qq.textContent;
+  const toast = el.querySelector(".qq-toast");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 1500);
+}
+
+// ============================================================
+//  FILTERS
+// ============================================================
+function buildFilters() {
+  filterGrp.innerHTML = CATEGORIES.map(c => `
+    <button class="filter-btn" data-cat="${c.key}">${c.icon} ${c.label}</button>
+  `).join("");
+
+  filterGrp.addEventListener("click", e => {
+    const btn = e.target.closest(".filter-btn");
+    if (!btn) return;
+    const cat = btn.dataset.cat;
+    // Clear favorites filter when switching category
+    showFavoritesOnly = false;
+    if (activeCat === cat) {
+      activeCat = null;
+      btn.classList.remove("active");
+    } else {
+      activeCat = cat;
+      document.querySelectorAll("#filterGroup .filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    }
+    render();
+  });
+}
+
+// ============================================================
+//  SEARCH
+// ============================================================
+searchInp.addEventListener("input", e => {
+  searchVal = e.target.value;
+  render();
+});
+
+// ============================================================
+//  CLEAR
+// ============================================================
+clearBtn.addEventListener("click", () => {
+  activeCat = null;
+  searchVal = "";
+  showFavoritesOnly = false;
+  searchInp.value = "";
+  document.querySelectorAll("#filterGroup .filter-btn").forEach(b => b.classList.remove("active"));
+  render();
+});
+
+// ============================================================
+//  FAVORITES FILTER TOGGLE
+// ============================================================
+favFilterBtn.addEventListener("click", () => {
+  if (!isLoggedIn()) {
+    openLoginModal();
+    return;
+  }
+  showFavoritesOnly = !showFavoritesOnly;
+  if (showFavoritesOnly) {
+    // Clear category filter when showing favorites
+    activeCat = null;
+    document.querySelectorAll("#filterGroup .filter-btn").forEach(b => b.classList.remove("active"));
+  }
+  render();
+});
+
+// ============================================================
+//  LOGIN MODAL EVENTS
+// ============================================================
+document.getElementById('loginBtn').addEventListener('click', openLoginModal);
+document.getElementById('loginModalClose').addEventListener('click', closeLoginModal);
+document.getElementById('loginModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeLoginModal();
+});
+
+document.querySelectorAll('.login-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const provider = btn.dataset.provider;
+    performLogin(provider);
+  });
+});
+
+// ============================================================
+//  USER MENU / DROPDOWN
+// ============================================================
+document.getElementById('userMenu').addEventListener('click', e => {
+  e.stopPropagation();
+  const dd = document.getElementById('userDropdown');
+  const arrow = document.getElementById('userArrow');
+  dd.classList.toggle('open');
+  arrow.classList.toggle('open');
+});
+
+document.addEventListener('click', () => {
+  const dd = document.getElementById('userDropdown');
+  const arrow = document.getElementById('userArrow');
+  dd.classList.remove('open');
+  arrow.classList.remove('open');
+});
+
+
+
+// ============================================================
+//  SHARE BUILD MODAL
+// ============================================================
+document.getElementById('shareFab').addEventListener('click', () => {
+  if (!isLoggedIn()) {
+    openLoginModal();
+    return;
+  }
+  document.getElementById('shareModal').classList.add('open');
+});
+
+document.getElementById('shareModalClose').addEventListener('click', () => {
+  document.getElementById('shareModal').classList.remove('open');
+});
+document.getElementById('shareModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) document.getElementById('shareModal').classList.remove('open');
+});
+
+document.getElementById('shareSubmitBtn').addEventListener('click', () => {
+  const name = document.getElementById('shareName').value.trim();
+  const weapon = document.getElementById('shareWeapon').value.trim();
+  const category = document.getElementById('shareCategory').value;
+  const code = document.getElementById('shareCode').value.trim();
+  const tagsStr = document.getElementById('shareTags').value.trim();
+  const desc = document.getElementById('shareDesc').value.trim();
+
+  if (!name || !weapon || !code) {
+    alert('请填写方案名称、武器和分享码');
+    return;
+  }
+
+  const tags = tagsStr ? tagsStr.split(/[,，、]/).map(t => t.trim()).filter(Boolean) : [];
+
+  addUserBuild({ name, weapon, category, code, tags, desc });
+
+  // Clear form
+  document.getElementById('shareName').value = '';
+  document.getElementById('shareWeapon').value = '';
+  document.getElementById('shareCode').value = '';
+  document.getElementById('shareTags').value = '';
+  document.getElementById('shareDesc').value = '';
+
+  document.getElementById('shareModal').classList.remove('open');
+  render();
+});
+
+// ============================================================
+//  RENDER CARD HELPER
+// ============================================================
+function renderCard(b, idx) {
+  const cat = CATEGORIES.find(c => c.key === b.category);
+  const catCls = cat ? cat.cls : "";
+  const catLabel = cat ? cat.label : b.category;
+  const isFav = !!getFavorites()[b.id];
+  const commentCount = getCommentCount(b.id);
+  const userBuildBadge = b.isUserBuild ? `<span class="user-badge">👤 ${b.submitter || '玩家分享'}</span>` : '';
+
+  return `
+    <div class="card" data-id="${b.id}" style="animation-delay:${(idx % 12) * 30}ms">
+      <button class="fav-btn ${isFav ? 'favored' : ''}" data-id="${b.id}" onclick="event.stopPropagation(); toggleFavorite('${b.id}')" title="${isFav ? '取消收藏' : '收藏'}">${isFav ? '❤️' : '♡'}</button>
+      <div class="card-header">
+        <div class="card-title">${userBuildBadge}${b.name}</div>
+        <span class="card-category ${catCls}">${catLabel}</span>
+      </div>
+      <div class="card-meta">
+        <span>🔧 ${b.weapon}</span>
+        <span>🏷️ ${b.tags.slice(0,2).join(" · ")}</span>
+      </div>
+      <div class="card-desc">${b.desc}</div>
+      <div class="card-tags">
+        ${b.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+      </div>
+      <div class="code-block" data-code="${b.code}" onclick="copyCode(this)">
+        <span class="code-text">${b.code}</span>
+        <span class="copy-btn" title="复制分享码">📋</span>
+        <span class="copied-toast">已复制 ✓</span>
+      </div>
+      <div class="card-actions">
+        <button class="card-action-btn comment-toggle-btn" data-id="${b.id}" onclick="toggleComments('${b.id}')">
+          💬 评论 <span class="comment-count">${commentCount}</span>
+        </button>
+      </div>
+      <div class="comment-section" id="comments-${b.id}">
+        <div class="comment-list" id="commentList-${b.id}">
+          ${renderComments(b.id)}
+        </div>
+        <div class="comment-input-wrap">
+          <input class="comment-input" id="commentInput-${b.id}" placeholder="${isLoggedIn() ? '写下你的评论…' : '请先登录后评论'}" ${isLoggedIn() ? '' : 'disabled'} />
+          <button class="comment-submit" data-id="${b.id}" ${isLoggedIn() ? `onclick="submitComment('${b.id}')"` : 'disabled'} ${isLoggedIn() ? '' : 'style="opacity:0.4;cursor:not-allowed;"'}>发送</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+function init() {
+  buildFilters();
+  updateUserUI();
+  render();
+}
+
+document.querySelectorAll('#userDropdown .user-dropdown-item').forEach(item => {
+  item.addEventListener('click', e => {
+    e.stopPropagation();
+    const action = item.dataset.action;
+    const dd = document.getElementById('userDropdown');
+    const arrow = document.getElementById('userArrow');
+    dd.classList.remove('open');
+    arrow.classList.remove('open');
+
+    if (action === 'logout') {
+      if (confirm('确定退出登录？')) {
+        setCurrentUser(null);
+        render();
+      }
+    } else if (action === 'favorites') {
+      if (!isLoggedIn()) { openLoginModal(); return; }
+      showFavoritesOnly = true;
+      activeCat = null;
+      document.querySelectorAll("#filterGroup .filter-btn").forEach(b => b.classList.remove("active"));
+      render();
+      document.getElementById('grid').scrollIntoView({ behavior: 'smooth' });
+    } else if (action === 'myshares') {
+      if (!isLoggedIn()) { openLoginModal(); return; }
+      const user = getCurrentUser();
+      const userBuilds = getUserBuilds();
+      const myIds = new Set(userBuilds.filter(b => b.submitterId === user.id).map(b => b.id));
+      if (myIds.size === 0) {
+        alert('你还没有分享过改枪方案，点击右下角 📤 开始分享吧！');
+        return;
+      }
+      showFavoritesOnly = false;
+      activeCat = null;
+      searchVal = '';
+      searchInp.value = '';
+      document.querySelectorAll("#filterGroup .filter-btn").forEach(b => b.classList.remove("active"));
+
+      // Render with only user's builds
+      const allBuilds = getAllBuilds();
+      const filtered = allBuilds.filter(b => myIds.has(b.id));
+
+      countBadge.textContent = `${filtered.length} / ${allBuilds.length} 个方案`;
+      updateStats();
+
+      if (filtered.length === 0) {
+        gridEl.innerHTML = '<div class="empty-state"><div class="big-icon">📤</div><h3>还没有分享过方案</h3><p>点击右下角 📤 按钮分享你的改枪配置</p></div>';
+        return;
+      }
+      gridEl.innerHTML = filtered.map((b, idx) => renderCard(b, idx)).join("");
+      requestAnimationFrame(() => {
+        document.querySelectorAll(".card").forEach(el => el.classList.add("visible"));
+      });
+    }
+  });
+});
+
+init();
+</script>
+</body>
+</html>
