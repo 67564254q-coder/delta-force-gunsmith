@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>三角洲行动 · 改枪码合集</title>
   <meta name="description" content="三角洲行动（Delta Force）武器改装分享码合集 — 突击步枪、射手步枪、冲锋枪、狙击枪等全武器改枪方案" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔫</text></svg>" />
+  <link rel="icon" type="image/png" href="delta-force-icon.png"><text y='.9em' font-size='90'>🔫</text></svg>" />
   <!-- Authing Guard -->
   <link rel="stylesheet" href="https://cdn.authing.co/packages/guard/latest/guard.min.css" />
   <script src="https://cdn.authing.co/packages/guard/latest/guard.min.js"></script>
@@ -1013,13 +1013,20 @@
 <!-- Share FAB -->
 <button class="share-fab" id="shareFab" title="分享改枪方案">📤</button>
 
-<!-- ===== Login Modal (Authing Guard fallback) ===== -->
+<!-- ===== Login Modal (QQ Login) ===== -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal-box">
     <button class="modal-close" id="loginModalClose">✕</button>
     <div class="modal-title">🔐 登录</div>
-    <div class="modal-subtitle" id="loginModalSubtitle">正在加载安全登录组件…</div>
-    <div id="guard-container" style="min-height:200px;"></div>
+    <div class="modal-subtitle">使用 QQ 登录后即可评论、收藏、分享</div>
+    <div class="login-btns" id="loginBtns">
+      <button class="login-btn qq" onclick="qqLogin()">
+        <span class="login-icon">🐧</span> 使用 QQ 登录
+      </button>
+    </div>
+    <div id="qqLoginHint" style="display:none;margin-top:16px;padding:12px;background:var(--bg-code);border-radius:var(--radius-sm);color:var(--text-muted);font-size:13px;">
+      正在跳转 QQ 授权…
+    </div>
     <div class="modal-note">登录后即可收藏方案、发布评论和分享改枪配置</div>
   </div>
 </div>
@@ -1288,53 +1295,59 @@ function updateUserUI() {
 // ============================================================
 //  AUTHING GUARD — REAL LOGIN
 // ============================================================
-let authingGuard = null;
-let guardReady = false;
+// QQ Login config
+const QQ_APPID = '1905261530';
+const QQ_REDIRECT_URI = encodeURIComponent('https://67564254q-coder.github.io/delta-force-gunsmith/');
 
-function initGuard() {
-  if (authingGuard) return;
-  if (typeof Guard === 'undefined') {
-    console.warn('Authing Guard not loaded yet, will retry on next login attempt');
-    return;
-  }
-  try {
-    authingGuard = new Guard({
-      appId: '6a6014d0ae12c2e4e0544397',
-      host: 'https://wgphvxz6z8b9-demo.authing.cn',
-      defaultLoginMethod: 'email-code',
-      // Show email + verification code and email + password as default methods
-      loginMethods: ['email-code', 'email-password']
-    });
-    guardReady = true;
+function qqLogin() {
+  document.getElementById('qqLoginHint').style.display = 'block';
+  const url = 'https://graph.qq.com/oauth2.0/authorize?' +
+    'response_type=token' +
+    '&client_id=' + QQ_APPID +
+    '&redirect_uri=' + QQ_REDIRECT_URI +
+    '&scope=get_user_info';
+  window.location.href = url;
+}
 
-    authingGuard.on('login', function(userInfo) {
-      const user = {
-        id: userInfo.id || userInfo._id || userInfo.sub || 'authing_' + Date.now(),
-        nickname: userInfo.nickname || userInfo.name || userInfo.username || (userInfo.email ? userInfo.email.split('@')[0] : '用户'),
-        avatar: userInfo.photo || userInfo.avatar || userInfo.picture || '',
-        email: userInfo.email || userInfo.phone || '',
-        loginTime: Date.now()
+function handleQQCallback() {
+  if (!window.location.hash || !window.location.hash.includes('access_token')) return false;
+  const hash = window.location.hash.substring(1);
+  const params = new URLSearchParams(hash);
+  const accessToken = params.get('access_token');
+  if (!accessToken) return false;
+  const script = document.createElement('script');
+  script.src = 'https://graph.qq.com/oauth2.0/me?access_token=' + accessToken + '&callback=qqOpenIdCallback';
+  window.qqOpenIdCallback = function(data) {
+    if (data.openid) {
+      const script2 = document.createElement('script');
+      script2.src = 'https://graph.qq.com/user/get_user_info?' +
+        'access_token=' + accessToken +
+        '&oauth_consumer_key=' + QQ_APPID +
+        '&openid=' + data.openid +
+        '&callback=qqUserInfoCallback';
+      window.qqUserInfoCallback = function(info) {
+        setCurrentUser({
+          id: 'qq_' + data.openid,
+          nickname: info.nickname || 'QQ用户',
+          avatar: info.figureurl_qq_2 || info.figureurl_qq_1 || info.figureurl || '',
+          loginType: 'qq',
+          loginTime: Date.now()
+        });
+        render();
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
       };
-      setCurrentUser(user);
-      closeLoginModal();
-      render();
-    });
-  } catch(e) {
-    console.error('Authing Guard init failed:', e);
-  }
+      document.body.appendChild(script2);
+    }
+  };
+  document.body.appendChild(script);
+  return true;
 }
 
 function openLoginModal() {
-  initGuard();
-  if (authingGuard && guardReady) {
-    // Show Authing Guard popup login
-    authingGuard.start();
-  } else {
-    // Fallback: show our modal with loading message
-    var subtitle = document.getElementById('loginModalSubtitle');
-    if (subtitle) subtitle.textContent = 'Authing Guard 加载失败，请刷新页面重试';
-    document.getElementById('loginModal').classList.add('open');
-  }
+  document.getElementById('loginModal').classList.add('open');
+  document.getElementById('qqLoginHint').style.display = 'none';
 }
 function closeLoginModal() {
   document.getElementById('loginModal').classList.remove('open');
@@ -1762,7 +1775,7 @@ function renderCard(b, idx) {
 function init() {
   buildFilters();
   updateUserUI();
-  initGuard();
+  handleQQCallback();
   render();
 }
 
