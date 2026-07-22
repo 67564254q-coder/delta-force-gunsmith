@@ -7,8 +7,7 @@
   <meta name="description" content="三角洲行动（Delta Force）武器改装分享码合集 — 突击步枪、射手步枪、冲锋枪、狙击枪等全武器改枪方案" />
   <link rel="icon" type="image/png" href="delta-force-icon.png"><text y='.9em' font-size='90'>🔫</text></svg>" />
   <!-- Authing Guard -->
-  <link rel="stylesheet" href="https://cdn.authing.co/packages/guard/latest/guard.min.css" />
-  <script src="https://cdn.authing.co/packages/guard/latest/guard.min.js"></script>
+  
   <style>
     /* ===== Reset & Base ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -299,7 +298,37 @@
       color: var(--text-muted);
     }
 
-    /* ===== Stats Bar ===== */
+    
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #fff;
+}
+.login-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+.login-btn:active {
+  transform: translateY(0);
+}
+.login-btn.qq {
+  background: linear-gradient(135deg, #12b7f5, #0099ff);
+}
+.login-btn .login-icon {
+  font-size: 22px;
+}
+
+/* ===== Stats Bar ===== */
     .stats-bar {
       max-width: 1200px;
       margin: 0 auto;
