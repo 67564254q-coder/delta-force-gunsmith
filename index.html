@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
@@ -1335,31 +1335,31 @@ function handleQQCallback() {
   const hash = window.location.hash;
   if (!hash) return false;
   const params = new URLSearchParams(hash.substring(1));
-  const code = params.get('code');
+  const code = params.get("code");
   if (code) {
-    fetch('https://qq-auth.67564254q.workers.dev/api/exchange?code=' + encodeURIComponent(code))
+    fetch("https://qq-auth.67564254q.workers.dev/api/exchange?code=" + encodeURIComponent(code))
       .then(r => r.json())
       .then(data => {
         if (data.ok && data.user) {
           setCurrentUser(data.user);
-          history.replaceState(null, '', window.location.pathname);
+          history.replaceState(null, "", window.location.pathname);
           closeLoginModal();
           render();
         } else {
-          alert('登录失败: ' + (data.msg || data.error));
+          alert("登录失败: " + (data.msg || data.error));
           closeLoginModal();
         }
       })
       .catch(e => {
-        alert('网络错误: ' + e.message);
+        alert("网络错误: " + e.message);
         closeLoginModal();
       });
     return true;
   }
-  const error = params.get('login_error');
+  const error = params.get("login_error");
   if (error) {
-    alert('登录失败: ' + decodeURIComponent(error));
-    history.replaceState(null, '', window.location.pathname);
+    alert("登录失败: " + decodeURIComponent(error));
+    history.replaceState(null, "", window.location.pathname);
     closeLoginModal();
     return true;
   }
