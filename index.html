@@ -1342,8 +1342,10 @@ function handleQQCallback() {
     fetch(QQ_WORKER_URL + '/api/exchange?code=' + encodeURIComponent(code))
       .then(response => response.json())
       .then(data => {
-        if (data.ok && data.user) {
-          setCurrentUser(data.user);
+        console.log('QQ exchange response:', data);
+        const userData = data.user || data.data || data;
+        if ((data.ok || data.success) && userData && userData.id) {
+          setCurrentUser(userData);
           history.replaceState(null, '', window.location.pathname);
           closeLoginModal();
           render();
