@@ -1,6 +1,6 @@
 // Vercel Function - QQ OAuth Login Redirect
-// 处理 /api/qq-login 路径
-export default function handler(req, res) {
+// 路径: /api/qq-login
+module.exports = async (req, res) => {
   const APP_ID = process.env.QQ_APP_ID;
   const REDIRECT_URI = process.env.QQ_REDIRECT_URI || 'https://gaiqiangma.xyz/qq-callback.html';
 
@@ -8,7 +8,6 @@ export default function handler(req, res) {
     return res.status(500).json({ error: 'QQ_APP_ID not configured' });
   }
 
-  // CSRF 防护
   const state = Math.random().toString(36).substring(2, 15);
 
   const qqAuthUrl =
@@ -19,4 +18,4 @@ export default function handler(req, res) {
     '&state=' + encodeURIComponent(state);
 
   res.redirect(302, qqAuthUrl);
-}
+};

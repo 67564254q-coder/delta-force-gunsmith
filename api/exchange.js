@@ -1,6 +1,9 @@
 // Vercel Function - QQ OAuth Code Exchange
-// 处理 /api/exchange 路径
-export default async function handler(req, res) {
+// 路径: /api/exchange
+module.exports = async (req, res) => {
+  // 允许跨域
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
   const APP_ID = process.env.QQ_APP_ID;
   const APP_KEY = process.env.QQ_APP_KEY;
   const REDIRECT_URI = process.env.QQ_REDIRECT_URI || 'https://gaiqiangma.xyz/qq-callback.html';
@@ -29,7 +32,7 @@ export default async function handler(req, res) {
     const tokenData = await tokenRes.json();
 
     if (tokenData.error) {
-      return res.status(400).json({ ok: false, error: 'Token exchange failed: ' + tokenData.error_description });
+      return res.status(400).json({ ok: false, error: 'Token exchange failed: ' + (tokenData.error_description || tokenData.error) });
     }
 
     const accessToken = tokenData.access_token;
@@ -40,7 +43,7 @@ export default async function handler(req, res) {
     const openIdData = await openIdRes.json();
 
     if (openIdData.error) {
-      return res.status(400).json({ ok: false, error: 'OpenID fetch failed: ' + openIdData.error_description });
+      return res.status(400).json({ ok: false, error: 'OpenID fetch failed: ' + (openIdData.error_description || openIdData.error) });
     }
 
     const openid = openIdData.openid;
@@ -71,4 +74,4 @@ export default async function handler(req, res) {
   } catch (err) {
     res.status(500).json({ ok: false, error: err.message });
   }
-}
+};
