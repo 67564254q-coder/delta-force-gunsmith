@@ -1337,33 +1337,28 @@ function handleQQCallback() {
   if (!hash) return false;
 
   const params = new URLSearchParams(hash.substring(1));
-  const code = params.get('code');
-  if (code) {
-    fetch(QQ_WORKER_URL + '/api/exchange?code=' + encodeURIComponent(code))
-      .then(response => response.json())
-      .then(data => {
-        console.log('QQ exchange response:', data);
-        const userData = data.user || data.data || data;
-        if ((data.ok || data.success) && userData && userData.id) {
-          setCurrentUser(userData);
-          history.replaceState(null, '', window.location.pathname);
-          closeLoginModal();
-          render();
-        } else {
-          alert('登录失败: ' + (data.msg || data.error || '未知错误'));
-          closeLoginModal();
-        }
-      })
-      .catch(error => {
-        alert('网络错误: ' + error.message);
+
+  // Worker 回调：直接返回加密的用户数据
+  const userDataEncoded = params.get('user_data');
+  if (userDataEncoded) {
+    try {
+      const jsonStr = decodeURIComponent(atob(userDataEncoded));
+      const user = JSON.parse(jsonStr);
+      if (user && user.id) {
+        setCurrentUser(user);
+        history.replaceState(null, '', window.location.pathname);
         closeLoginModal();
-      });
-    return true;
+        render();
+        return true;
+      }
+    } catch(e) {
+      console.error('QQ callback parse error:', e);
+    }
   }
 
   const loginError = params.get('login_error');
   if (loginError) {
-    alert('登录失败: ' + loginError);
+    alert('登录失败: ' + decodeURIComponent(loginError));
     history.replaceState(null, '', window.location.pathname);
     closeLoginModal();
     return true;
