@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>QQ登录回调中...</title>
+  <script>
+    // QQ 登录回调页面 - 将 code 传递给主页面
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var code = params.get('code');
+      var state = params.get('state');
+      if (code) {
+        // 跳转到主页面，把 code 放在 hash 中
+        window.location.replace('/#code=' + encodeURIComponent(code) + '&state=' + encodeURIComponent(state || ''));
+      } else {
+        window.location.replace('/#login_error=no_code');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>正在处理QQ登录...</p>
+</body>
+</html>
