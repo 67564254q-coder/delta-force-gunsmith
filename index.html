@@ -1329,7 +1329,7 @@ const QQ_WORKER_URL = ''; // 使用相对路径，Vercel 自动处理
 
 function qqLogin() {
   document.getElementById('qqLoginHint').style.display = 'block';
-  window.location.href = QQ_WORKER_URL + '/qq-login';
+  window.location.href = QQ_WORKER_URL + '/api/qq-login';
 }
 
 function handleQQCallback() {
